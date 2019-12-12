@@ -43,7 +43,10 @@ function setCanvasFromId(id, hiDPI = true) {
 }
 
 function rect(x, y, width, height) {
-    gfx.ctx.fillRect(x, y, width, height);
+    gfx.ctx.beginPath();
+    gfx.ctx.rect(x, y, width, height);
+    gfx.ctx.fill();
+    gfx.ctx.stroke();
 }
 
 function resetTransform() {
@@ -88,4 +91,33 @@ function stroke(a, b, c) {
             gfx.ctx.strokeStyle = 'rgb(' + a + ',' + a + ',' + a + ')';
         } else throw Error('Invalid params for stroke call');
     } else throw Error('Invalid params for stroke call');
+}
+
+function ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise){
+    if(!height) height = width;
+    gfx.ctx.beginPath();
+    gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
+    gfx.ctx.fill();
+    gfx.ctx.stroke();
+}
+
+function line(x1, y1, x2, y2){
+    gfx.ctx.beginPath();
+    gfx.ctx.moveTo(x1, y1);
+    gfx.ctx.lineTo(x2, y2);
+    gfx.ctx.stroke();
+}
+
+function poly(ptArr){
+    gfx.ctx.beginPath();
+    gfx.ctx.moveTo(ptArr[ptArr.length].x, ptArr[ptArr.length].y);
+    for(var i = 0; i < ptArr.length; i++){
+        gfx.ctx.lineTo(ptArr[i].x, ptArr[i].y);
+    }
+    gfx.ctx.stroke();
+}
+
+function text(str, x, y){
+    gfx.ctx.fillText(str, x, y);
+    gfx.ctx.strokeText(str, x, y);
 }
