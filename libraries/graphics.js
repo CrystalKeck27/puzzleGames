@@ -57,16 +57,16 @@ function transform(tform) {
     gfx.ctx.transform(tform);
 }
 
-function scale(tform) {
-    gfx.ctx.scale(tform);
+function scale(x, y) {
+    gfx.ctx.scale(x, y);
 }
 
-function translate(tform) {
-    gfx.ctx.translate(tform);
+function translate(x, y) {
+    gfx.ctx.translate(x, y);
 }
 
-function rotate(tform) {
-    gfx.ctx.rotate(tform);
+function rotate(angle) {
+    gfx.ctx.rotate(angle);
 }
 
 function fill(a, b, c) {
@@ -120,4 +120,8 @@ function poly(ptArr){
 function text(str, x, y){
     gfx.ctx.fillText(str, x, y);
     gfx.ctx.strokeText(str, x, y);
+}
+
+function strokeWeight(width){
+    gfx.ctx.lineWidth = width;
 }
