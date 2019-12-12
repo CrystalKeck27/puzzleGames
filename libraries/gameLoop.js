@@ -1,18 +1,35 @@
-var gameLoop = {
+var _gameLoop = {
+    running: false,
     stopToken: null,
-    previousFrame: 0,
-    count: 0
+    previousFrame: 0
 }
-console.log('yes');
-(function() {
-    function main(tFrame) {
-        //console.log(tFrame-gameLoop.previousFrame);
-        //gameLoop.previousFrame = tFrame;
-        while (tFrame > count * 10000) {
-            console.log(tFrame);
-            count += 1;
-        }
-        gameLoop.stopToken = window.requestAnimationFrame(main);
+
+    function initializeBasicGameLoop(callback) {
+        (function() {
+            function main(tFrame) {
+                _gameLoop.running = true;
+                callback(tFrame);
+                _gameLoop.stopToken = window.requestAnimationFrame(main);
+            }
+            main(0);
+        })();
     }
-    main(0);
-})();
+
+    function initializeDeltaGameLoop(callback) {
+        (function() {
+            function main(tFrame) {
+                _gameLoop.running = true;
+                var delta = tFrame - _gameLoop.previousFrame;
+                _gameLoop.previousFrame = tFrame;
+                callback(delta);
+                _gameLoop.stopToken = window.requestAnimationFrame(main);
+            }
+            main(0);
+        })();
+
+    }
+
+    function stopLoop() {
+        window.cancelAnimationFrame(_gameLoop.stopToken);
+        _gameLoop.running = false;
+    }
