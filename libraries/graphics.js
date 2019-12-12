@@ -11,7 +11,7 @@ function setCanvas(canvas){
 }
 
 function updateContext(){
-    gfx.cnv.getContext('2d');
+    gfx.ctx = gfx.cnv.getContext('2d');
 }
 
 function setCanvasFromId(id){
