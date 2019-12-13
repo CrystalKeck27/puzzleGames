@@ -1,7 +1,8 @@
 var _gameLoop = {
     running: false,
     stopToken: null,
-    previousFrame: 0
+    previousFrame: 0,
+    events: []
 }
 
     function initializeBasicGameLoop(callback) {
@@ -32,4 +33,8 @@ var _gameLoop = {
     function stopLoop() {
         window.cancelAnimationFrame(_gameLoop.stopToken);
         _gameLoop.running = false;
+    }
+    
+    function schedule(callback, cps){
+        
     }
