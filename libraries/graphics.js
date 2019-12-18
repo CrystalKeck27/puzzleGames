@@ -1,3 +1,6 @@
+/*---- GRAPHICS LIBRARY ----*/
+
+//  Stores variables needed for the library
 var gfx = {
     //the reference to the canvas
     cnv: null,
@@ -5,8 +8,9 @@ var gfx = {
     ctx: null,
     //the base transform (needed for hiDPI transformations)
     transform: null
-}
+};
 
+//  Sets the canvas, context, and transform for future use
 function setCanvas(canvas, hiDPI = true) {
     gfx.cnv = canvas;
     updateContext();
@@ -19,6 +23,8 @@ function setCanvas(canvas, hiDPI = true) {
     }
 }
 
+//  Makes the canvas support high definition displays
+//  It does this by scaling up with html then down with css
 function makeHiDPI() {
     if (window.devicePixelRatio > 1) {
         var canvasWidth = gfx.cnv.width;
@@ -34,41 +40,52 @@ function makeHiDPI() {
     }
 }
 
+
+//  Updates the context, called by setCanvas
 function updateContext() {
     gfx.ctx = gfx.cnv.getContext('2d');
 }
 
+//  Sets the canvas given its id
 function setCanvasFromId(id, hiDPI = true) {
     setCanvas(document.getElementById(id), hiDPI);
 }
 
+// Draws a rectangle on the current context
 function rect(x, y, width, height) {
     gfx.ctx.beginPath();
     gfx.ctx.rect(x, y, width, height);
+    gfx.ctx.closePath();
     gfx.ctx.fill();
     gfx.ctx.stroke();
 }
 
+// Resets the transform to the base transform
 function resetTransform() {
     gfx.ctx.setTransform(gfx.transform);
 }
 
+// Calls transform on the current context
 function transform(tform) {
     gfx.ctx.transform(tform);
 }
 
+// Calls scale on the current context
 function scale(x, y) {
     gfx.ctx.scale(x, y);
 }
 
+// Calls translate on the current context
 function translate(x, y) {
     gfx.ctx.translate(x, y);
 }
 
+// Calls rotate on the current context
 function rotate(angle) {
     gfx.ctx.rotate(angle);
 }
 
+//  Changes what color shapes are filled with
 function fill(a, b, c) {
     if (typeof(a) == 'string') {
         gfx.ctx.fillStyle = a;
@@ -81,6 +98,7 @@ function fill(a, b, c) {
     } else throw Error('Invalid params for fill call');
 }
 
+//  Changes what color strokes are drawn with
 function stroke(a, b, c) {
     if (typeof(a) == 'string') {
         gfx.ctx.strokeStyle = a;
@@ -93,35 +111,44 @@ function stroke(a, b, c) {
     } else throw Error('Invalid params for stroke call');
 }
 
-function ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise){
-    if(!height) height = width;
+//  Draws an ellipse
+function ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise) {
+    if (!height) height = width;
     gfx.ctx.beginPath();
     gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
+    gfx.ctx.closePath();
     gfx.ctx.fill();
     gfx.ctx.stroke();
 }
 
-function line(x1, y1, x2, y2){
+// Draws a line
+function line(x1, y1, x2, y2) {
     gfx.ctx.beginPath();
     gfx.ctx.moveTo(x1, y1);
     gfx.ctx.lineTo(x2, y2);
+    gfx.ctx.closePath();
     gfx.ctx.stroke();
 }
 
-function poly(ptArr){
+//
+function poly(ptArr) {
     gfx.ctx.beginPath();
     gfx.ctx.moveTo(ptArr[ptArr.length].x, ptArr[ptArr.length].y);
-    for(var i = 0; i < ptArr.length; i++){
+    for (var i = 0; i < ptArr.length; i++) {
         gfx.ctx.lineTo(ptArr[i].x, ptArr[i].y);
     }
+    gfx.ctx.closePath();
     gfx.ctx.stroke();
+    gfx.ctx.fill();
 }
 
-function text(str, x, y){
+//  Draws text
+function text(str, x, y) {
     gfx.ctx.fillText(str, x, y);
     gfx.ctx.strokeText(str, x, y);
 }
 
-function strokeWeight(width){
+//  Changes the width of lines drawn
+function strokeWeight(width) {
     gfx.ctx.lineWidth = width;
 }
