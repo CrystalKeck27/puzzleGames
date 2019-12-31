@@ -24,6 +24,7 @@ function setCanvas(canvas, hiDPI = true) {
 }
 
 //  Makes the canvas support high definition displays
+//  Called automatically when the canvas is created
 //  It does this by scaling up with html then down with css
 function makeHiDPI() {
     if (window.devicePixelRatio > 1) {
@@ -85,6 +86,10 @@ function rotate(angle) {
     gfx.ctx.rotate(angle);
 }
 
+function push() {
+
+}
+
 //  Changes what color shapes are filled with
 function fill(a, b, c) {
     if (typeof(a) == 'string') {
@@ -130,7 +135,7 @@ function line(x1, y1, x2, y2) {
     gfx.ctx.stroke();
 }
 
-//
+//  Draws a polygon
 function poly(ptArr) {
     gfx.ctx.beginPath();
     gfx.ctx.moveTo(ptArr[ptArr.length].x, ptArr[ptArr.length].y);
@@ -148,7 +153,7 @@ function text(str, x, y) {
     gfx.ctx.strokeText(str, x, y);
 }
 
-//  Changes the width of lines drawn
+//  Changes the width of all lines drawn
 function strokeWeight(width) {
     gfx.ctx.lineWidth = width;
 }
