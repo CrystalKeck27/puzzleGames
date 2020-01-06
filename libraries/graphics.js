@@ -166,14 +166,15 @@ function strokeWeight(width) {
 
 //  Returns the width of the canvas
 function getWidth() {
-    return gfx.cnv.width;
+    return gfx.cnv.width / window.devicePixelRatio;
 }
 
 //  Returns the height of the canvas
 function getHeight() {
-    return gfx.cnv.height;
+    return gfx.cnv.height / window.devicePixelRatio;
 }
 
+//  Not done yet
 function background(a, b, c) {
     push();
     resetTransform();
