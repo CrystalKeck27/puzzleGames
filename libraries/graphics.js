@@ -86,8 +86,14 @@ function rotate(angle) {
     gfx.ctx.rotate(angle);
 }
 
+//  Remembers drawing data
 function push() {
+    gfx.ctx.save();
+}
 
+//  Restores drawing data from last unrestored save
+function pop() {
+    gfx.ctx.restore();
 }
 
 //  Changes what color shapes are filled with
@@ -156,4 +162,22 @@ function text(str, x, y) {
 //  Changes the width of all lines drawn
 function strokeWeight(width) {
     gfx.ctx.lineWidth = width;
+}
+
+//  Returns the width of the canvas
+function getWidth() {
+    return gfx.cnv.width;
+}
+
+//  Returns the height of the canvas
+function getHeight() {
+    return gfx.cnv.height;
+}
+
+function background(a, b, c) {
+    push();
+    resetTransform();
+    fill(a, b, c);
+
+    pop();
 }

@@ -1,0 +1,2 @@
+setCanvasFromId("gameCanvas");
+
