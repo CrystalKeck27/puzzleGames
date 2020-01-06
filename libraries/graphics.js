@@ -124,4 +124,25 @@ function text(str, x, y){
 
 function strokeWeight(width){
     gfx.ctx.lineWidth = width;
+<<<<<<< HEAD
+=======
+}
+
+//  Returns the width of the canvas
+function getWidth() {
+    return gfx.cnv.width;
+}
+
+//  Returns the height of the canvas
+function getHeight() {
+    return gfx.cnv.height;
+}
+
+function background(a, b, c) {
+    push();
+    resetTransform();
+    fill(a, b, c);
+
+    pop();
+>>>>>>> parent of 7d339cf... more work on gfx library
 }
