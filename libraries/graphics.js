@@ -7,8 +7,21 @@ var gfx = {
     //the reference to the context
     ctx: null,
     //the base transform (needed for hiDPI transformations)
-    transform: null
+    transform: null,
+    //stores other drawing data
+    otherData: [{
+        doStroke: true,
+        doFill: true
+    }],
+
+    doStroke: true,
+    doFill: true
 };
+
+function updateDrawingData() {
+    data = gfx.otherData[gfx.otherData.length - 1];
+    Object.assign(gfx, data);
+}
 
 //  Sets the canvas, context, and transform for future use
 function setCanvas(canvas, hiDPI = true) {
@@ -89,11 +102,15 @@ function rotate(angle) {
 //  Remembers drawing data
 function push() {
     gfx.ctx.save();
+    gfx.otherData.push(gfx.otherData[gfx.otherData.length - 1]);
+    updateDrawingData()
 }
 
 //  Restores drawing data from last unrestored save
 function pop() {
     gfx.ctx.restore();
+    gfx.otherData.pop();
+    updateDrawingData();
 }
 
 //  Changes what color shapes are filled with
