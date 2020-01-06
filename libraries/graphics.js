@@ -191,11 +191,11 @@ function getHeight() {
     return gfx.cnv.height / window.devicePixelRatio;
 }
 
-//  Not done yet
+//  Draws background
 function background(a, b, c) {
     push();
     resetTransform();
     fill(a, b, c);
-
+    gfx.ctx.fillRect(0, 0, getWidth(), getHeight());
     pop();
 }
