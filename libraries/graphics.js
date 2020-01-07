@@ -132,7 +132,7 @@ function fill(a, b, c) {
         } else if (!b && !c) {
             gfx.ctx.fillStyle = 'rgb(' + a + ',' + a + ',' + a + ')';
         } else throw Error('Invalid params for fill call');
-    } else throw Error('Invalid params for fill call');
+    } else if(a != undefined) throw Error('Invalid params for fill call');
 }
 
 //  Don't draw lines
@@ -151,7 +151,7 @@ function stroke(a, b, c) {
         } else if (!b && !c) {
             gfx.ctx.strokeStyle = 'rgb(' + a + ',' + a + ',' + a + ')';
         } else throw Error('Invalid params for stroke call');
-    } else throw Error('Invalid params for stroke call');
+    } else if (a != undefined) throw Error('Invalid params for stroke call');
 }
 
 //  Draws an ellipse
