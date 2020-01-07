@@ -4,10 +4,6 @@ window.onresize = makeHiDPI;
 
 //  Stores variables needed for the library
 var gfx = {
-    //stores the starting width of the canvas
-    cnvStartWidth: null,
-    //stores the starting height of the canvas
-    cnvStartHeight: null,
     //the reference to the canvas
     cnv: null,
     //the reference to the context
@@ -47,14 +43,14 @@ function setCanvas(canvas, hiDPI = true) {
 //  It does this by scaling up with html then down with css
 function makeHiDPI() {
     if (window.devicePixelRatio > 1) {
-        if (gfx.cnvStartWidth == null) {
-            gfx.cnvStartWidth = gfx.cnv.width;
-            gfx.cnvStartHeight = gfx.cnv.height;
+        if (gfx.cnv.dataset.width == null) {
+            gfx.cnv.dataset.width = gfx.cnv.width;
+            gfx.cnv.dataset.height = gfx.cnv.height;
         }
-        gfx.cnv.width = gfx.cnvStartWidth * window.devicePixelRatio;
-        gfx.cnv.height = gfx.cnvStartHeight * window.devicePixelRatio;
-        gfx.cnv.style.width = gfx.cnvStartWidth + "px";
-        gfx.cnv.style.height = gfx.cnvStartHeight + "px";
+        gfx.cnv.width = gfx.cnv.dataset.width * window.devicePixelRatio;
+        gfx.cnv.height = gfx.cnv.dataset.height * window.devicePixelRatio;
+        gfx.cnv.style.width = gfx.cnv.dataset.width + "px";
+        gfx.cnv.style.height = gfx.cnv.dataset.height + "px";
 
         gfx.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         gfx.transform = gfx.ctx.getTransform();
