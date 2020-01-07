@@ -1,7 +1,7 @@
 setCanvasFromId("gameCanvas");
 var msgBox = document.getElementById("msgBox");
 
-let rows = 8, cols = 8;
+let rows = 6, cols = 6;
 let grid = [];
 for (let i = 0; i < cols; i++) {
     grid[i] = [];
@@ -12,7 +12,7 @@ for (let i = 0; i < cols; i++) {
 
 
 function render() {
-    background(255, 0, 0);
+    background(255);
     let w = getWidth() / cols, h = getHeight() / rows;
     stroke(0);
     fill(255);
@@ -35,26 +35,65 @@ function render() {
             rect(w * i, h * j, w, h);
         }
     }
-
 }
 
 initializeGameLoop(render);
 
-gfx.cnv.onclick = function(e) {
-    let x = e.offsetX;
-    let y = e.offsetY;
-    x /= 50;
-    y /= 50;
+gfx.cnv.onclick = function (e) {
+    let x = e.offsetX / window.devicePixelRatio;
+    let y = e.offsetY / window.devicePixelRatio;
+    x /= getWidth() / cols;
+    y /= getHeight() / rows;
     x = Math.floor(x);
     y = Math.floor(y);
     grid[x][y]++;
     if (grid[x][y] == 3) grid[x][y] = 0;
 }
 
-function check() {
+function autofill() {
+    for (let i = 0; i < cols; i++) {
+        if (getColData(i)[1] >= cols / 2) {
+            for (let j = 0; j < rows; j++) {
+                if (grid[i][j] == 0) grid[i][j] = 2;
+            }
+        }
+        if (getColData(i)[2] >= cols / 2) {
+            for (let j = 0; j < rows; j++) {
+                if (grid[i][j] == 0) grid[i][j] = 1;
+            }
+        }
+    }
+    for (let i = 0; i < rows; i++) {
+        if (getRowData(i)[1] >= rows / 2) {
+            for (let j = 0; j < cols; j++) {
+                if (grid[j][i] == 0) grid[j][i] = 2;
+            }
+        }
+        if (getRowData(i)[2] >= rows / 2) {
+            for (let j = 0; j < cols; j++) {
+                if (grid[j][i] == 0) grid[j][i] = 1;
+            }
+        }
+    }
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
             
         }
     }
+}
+
+function getRowData(row) {
+    let count = [0, 0, 0];
+    for (let i = 0; i < cols; i++) {
+        count[grid[i][row]]++;
+    }
+    return count;
+}
+
+function getColData(col) {
+    let count = [0, 0, 0];
+    for (let i = 0; i < rows; i++) {
+        count[grid[col][i]]++;
+    }
+    return count;
 }
