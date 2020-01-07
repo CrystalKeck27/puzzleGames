@@ -21,7 +21,7 @@ var gfx = {
 };
 
 function updateDrawingData() {
-    data = gfx.otherData[gfx.otherData.length - 1];
+    let data = gfx.otherData[gfx.otherData.length - 1];
     Object.assign(gfx, data);
 }
 
@@ -73,8 +73,8 @@ function rect(x, y, width, height) {
     gfx.ctx.beginPath();
     gfx.ctx.rect(x, y, width, height);
     gfx.ctx.closePath();
-    gfx.ctx.fill();
-    gfx.ctx.stroke();
+    if (gfx.doFill) gfx.ctx.fill();
+    if (gfx.doStroke) gfx.ctx.stroke();
 }
 
 // Resets the transform to the base transform
@@ -116,8 +116,14 @@ function pop() {
     updateDrawingData();
 }
 
+//  Don't fill things in
+function noFill(){
+    gfx.doFill = false;
+}
+
 //  Changes what color shapes are filled with
 function fill(a, b, c) {
+    gfx.doFill = true;
     if (typeof(a) == 'string') {
         gfx.ctx.fillStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
@@ -129,8 +135,14 @@ function fill(a, b, c) {
     } else throw Error('Invalid params for fill call');
 }
 
+//  Don't draw lines
+function noStroke(){
+    gfx.doStroke = false;
+}
+
 //  Changes what color strokes are drawn with
 function stroke(a, b, c) {
+    gfx.doStroke = true;
     if (typeof(a) == 'string') {
         gfx.ctx.strokeStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
@@ -143,13 +155,13 @@ function stroke(a, b, c) {
 }
 
 //  Draws an ellipse
-function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = Math.PI*2, counterclockwise = false) {
+function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = Math.PI * 2, counterclockwise = false) {
     if (!height) height = width;
     gfx.ctx.beginPath();
     gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
     gfx.ctx.closePath();
-    gfx.ctx.fill();
-    gfx.ctx.stroke();
+    if (gfx.doFill) gfx.ctx.fill();
+    if (gfx.doStdoStroke) gfx.ctx.stroke();
 }
 
 // Draws a line
@@ -158,7 +170,7 @@ function line(x1, y1, x2, y2) {
     gfx.ctx.moveTo(x1, y1);
     gfx.ctx.lineTo(x2, y2);
     gfx.ctx.closePath();
-    gfx.ctx.stroke();
+    if (gfx.doStdoStroke) gfx.ctx.stroke();
 }
 
 //  Draws a polygon
@@ -169,8 +181,8 @@ function poly(ptArr) {
         gfx.ctx.lineTo(ptArr[i].x, ptArr[i].y);
     }
     gfx.ctx.closePath();
-    gfx.ctx.stroke();
-    gfx.ctx.fill();
+    if (gfx.doStdoStroke) gfx.ctx.stroke();
+    if (gfx.doFill) gfx.ctx.fill();
 }
 
 //  Draws text
