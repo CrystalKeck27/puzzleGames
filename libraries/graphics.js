@@ -161,7 +161,7 @@ function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = M
     gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
     gfx.ctx.closePath();
     if (gfx.doFill) gfx.ctx.fill();
-    if (gfx.doStdoStroke) gfx.ctx.stroke();
+    if (gfx.doStroke) gfx.ctx.stroke();
 }
 
 // Draws a line
@@ -170,7 +170,7 @@ function line(x1, y1, x2, y2) {
     gfx.ctx.moveTo(x1, y1);
     gfx.ctx.lineTo(x2, y2);
     gfx.ctx.closePath();
-    if (gfx.doStdoStroke) gfx.ctx.stroke();
+    if (gfx.doStroke) gfx.ctx.stroke();
 }
 
 //  Draws a polygon
@@ -181,7 +181,7 @@ function poly(ptArr) {
         gfx.ctx.lineTo(ptArr[i].x, ptArr[i].y);
     }
     gfx.ctx.closePath();
-    if (gfx.doStdoStroke) gfx.ctx.stroke();
+    if (gfx.doStroke) gfx.ctx.stroke();
     if (gfx.doFill) gfx.ctx.fill();
 }
 
