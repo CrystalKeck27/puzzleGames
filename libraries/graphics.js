@@ -143,7 +143,7 @@ function stroke(a, b, c) {
 }
 
 //  Draws an ellipse
-function ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise) {
+function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = Math.PI*2, counterclockwise = false) {
     if (!height) height = width;
     gfx.ctx.beginPath();
     gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
