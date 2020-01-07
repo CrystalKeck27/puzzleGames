@@ -1,7 +1,7 @@
 setCanvasFromId("gameCanvas");
 var msgBox = document.getElementById("msgBox");
 
-let rows = 6, cols = 6;
+let rows = 8, cols = 8;
 let grid = [];
 for (let i = 0; i < cols; i++) {
     grid[i] = [];
@@ -35,13 +35,14 @@ function render() {
             rect(w * i, h * j, w, h);
         }
     }
+    msgBox.innerHTML = window.devicePixelRatio;
 }
 
 initializeGameLoop(render);
 
 gfx.cnv.onclick = function (e) {
-    let x = e.offsetX / window.devicePixelRatio;
-    let y = e.offsetY / window.devicePixelRatio;
+    let x = e.offsetX;
+    let y = e.offsetY;
     x /= getWidth() / cols;
     y /= getHeight() / rows;
     x = Math.floor(x);

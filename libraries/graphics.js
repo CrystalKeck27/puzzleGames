@@ -46,8 +46,8 @@ function makeHiDPI() {
 
         gfx.cnv.width = canvasWidth * window.devicePixelRatio;
         gfx.cnv.height = canvasHeight * window.devicePixelRatio;
-        gfx.cnv.style.width = canvasWidth;
-        gfx.cnv.style.height = canvasHeight;
+        gfx.cnv.style.width = canvasWidth + "px";
+        gfx.cnv.style.height = canvasHeight + "px";
 
         gfx.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         gfx.transform = gfx.ctx.getTransform();
