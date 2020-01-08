@@ -17,7 +17,10 @@ var gfx = {
     }],
     //tells drawing functions what to draw
     doStroke: true,
-    doFill: true
+    doFill: true,
+    //draws with this transparency
+    strokeAlpha: 1,
+    fillAlpha: 1
 };
 
 //  Update doStroke and doFill
@@ -123,13 +126,17 @@ function noFill(){
 }
 
 //  Changes what color shapes are filled with
-function fill(a, b, c) {
+function fill(a, b, c, d) {
     gfx.doFill = true;
     if (typeof(a) == 'string') {
         gfx.ctx.fillStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
-        if ((typeof(b) == 'number' && b < 256 && b >= 0) && (typeof(c) == 'number' && c < 256 && c >= 0)) {
-            gfx.ctx.fillStyle = 'rgb(' + a + ',' + b + ',' + c + ')';
+        if ((typeof (b) == 'number' && b < 256 && b >= 0) && (typeof (c) == 'number' && c < 256 && c >= 0)) {
+            if (typeof (d) == 'number' && d <=1 && d >= 0) {
+                gfx.ctx.fillStyle = 'rgba(' + a + ',' + b + ',' + c + ',' + d + ')';
+            } else {
+                gfx.ctx.fillStyle = 'rgb(' + a + ',' + b + ',' + c + ')';
+            }
         } else if (!b && !c) {
             gfx.ctx.fillStyle = 'rgb(' + a + ',' + a + ',' + a + ')';
         } else throw Error('Invalid params for fill call');
@@ -142,13 +149,17 @@ function noStroke(){
 }
 
 //  Changes what color strokes are drawn with
-function stroke(a, b, c) {
+function stroke(a, b, c, d) {
     gfx.doStroke = true;
     if (typeof(a) == 'string') {
         gfx.ctx.strokeStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
-        if ((typeof(b) == 'number' && b < 256 && b >= 0) && (typeof(c) == 'number' && c < 256 && c >= 0)) {
-            gfx.ctx.strokeStyle = 'rgb(' + a + ',' + b + ',' + c + ')';
+        if ((typeof (b) == 'number' && b < 256 && b >= 0) && (typeof (c) == 'number' && c < 256 && c >= 0)) {
+            if (typeof (d) == 'number' && d <= 1 && d >= 0) {
+                gfx.ctx.fillStyle = 'rgba(' + a + ',' + b + ',' + c + ',' + d + ')';
+            } else {
+                gfx.ctx.fillStyle = 'rgb(' + a + ',' + b + ',' + c + ')';
+            }
         } else if (!b && !c) {
             gfx.ctx.strokeStyle = 'rgb(' + a + ',' + a + ',' + a + ')';
         } else throw Error('Invalid params for stroke call');
