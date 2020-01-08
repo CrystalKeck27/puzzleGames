@@ -1,4 +1,5 @@
 setCanvasFromId('gameCanvas');
+var playing = true;
 var isXTurn = true;
 var data = [];
 for (let i = 0; i < 3; i++) {
@@ -9,23 +10,28 @@ for (let i = 0; i < 3; i++) {
 }
 
 function render() {
-    background(255);
-    strokeWeight(5);
-    noFill();
-    line(150, 0, 150, 450);
-    line(300, 0, 300, 450);
-    line(0, 150, 450, 150);
-    line(0, 300, 450, 300);
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            let px = j * 150 + 75;
-            let py = i * 150 + 75;
-            if (data[i][j] == 1) {
-                drawAnX(px, py);
-            } else if (data[i][j] == 2) {
-                drawAnO(px, py);
+    if (playing) {
+        background(255);
+        strokeWeight(5);
+        noFill();
+        line(150, 0, 150, 450);
+        line(300, 0, 300, 450);
+        line(0, 150, 450, 150);
+        line(0, 300, 450, 300);
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                let px = j * 150 + 75;
+                let py = i * 150 + 75;
+                if (data[i][j] == 1) {
+                    drawAnX(px, py);
+                } else if (data[i][j] == 2) {
+                    drawAnO(px, py);
+                }
             }
         }
+    } else {
+        background(225);
+        
     }
 }
 
@@ -45,6 +51,14 @@ gfx.cnv.onclick = function(e) {
         isXTurn = !isXTurn;
     }
 };
+
+function checkForWin() {
+    for (let i = 0; i < 3; i++) {
+        if (data[i][0] == data[i][1] && data[i][1] == data[i][2]); {
+            gfx.cnv.onclick = null;
+        }
+    }
+}
 
 function drawAnO(x, y) {
     ellipse(x, y, 65);
