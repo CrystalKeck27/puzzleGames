@@ -18,9 +18,6 @@ var gfx = {
     //tells drawing functions what to draw
     doStroke: true,
     doFill: true,
-    //draws with this transparency
-    strokeAlpha: 1,
-    fillAlpha: 1
 };
 
 //  Update doStroke and doFill
