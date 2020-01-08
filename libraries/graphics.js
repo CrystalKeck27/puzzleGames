@@ -196,8 +196,8 @@ function poly(ptArr) {
 
 //  Draws text
 function text(str, x, y) {
-    gfx.ctx.fillText(str, x, y);
-    gfx.ctx.strokeText(str, x, y);
+    if (gfx.doFill) gfx.ctx.fillText(str, x, y);
+    if (gfx.doStroke) gfx.ctx.strokeText(str, x, y);
 }
 
 //  Changes the width of all lines drawn
