@@ -15,11 +15,12 @@ var gfx = {
         doStroke: true,
         doFill: true
     }],
-    //unimplemented
+    //tells drawing functions what to draw
     doStroke: true,
     doFill: true
 };
 
+//  Update doStroke and doFill
 function updateDrawingData() {
     let data = gfx.otherData[gfx.otherData.length - 1];
     Object.assign(gfx, data);
