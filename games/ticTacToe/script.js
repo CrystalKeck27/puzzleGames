@@ -1,4 +1,5 @@
 setCanvasFromId('gameCanvas');
+var xWon;
 var playing = true;
 var isXTurn = true;
 var data = [];
@@ -31,7 +32,11 @@ function render() {
         }
     } else {
         background(225);
-        
+        if (xWon) {
+            text("X WIN'S!", 225, 225);
+        } else {
+            text("O WIN'S!", 225, 225);
+        }
     }
 }
 
@@ -50,11 +55,12 @@ gfx.cnv.onclick = function(e) {
         }
         isXTurn = !isXTurn;
     }
+    checkForWin();
 };
 
 function checkForWin() {
     for (let i = 0; i < 3; i++) {
-        if (data[i][0] == data[i][1] && data[i][1] == data[i][2]); {
+        if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0); {
             gfx.cnv.onclick = null;
         }
     }
