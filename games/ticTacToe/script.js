@@ -81,22 +81,22 @@ function checkForWin() {
              }
                  playing = false;
          }
-         if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
-             if (data[0][i] == 1) {
-                 xWon = true;
-             } else {
-                 xWon = false;
-             }
-             playing = false;
-         }
-         if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
-             if (data[0][i] == 1) {
-                 xWon = true;
-             } else {
-                 xWon = false;
-             }
-             playing = false;
-         }
+    }
+    if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
+        if (data[1][1] == 1) {
+            xWon = true;
+        } else {
+            xWon = false;
+        }
+        playing = false;
+    }
+    if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
+        if (data[1][1] == 1) {
+            xWon = true;
+        } else {
+            xWon = false;
+        }
+        playing = false;
     }
 }
 
