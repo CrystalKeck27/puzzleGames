@@ -41,27 +41,34 @@ function render() {
 }
 
 gfx.cnv.onclick = function(e) {
-    let x = e.offsetX;
-    let y = e.offsetY;
-    x /= 150;
-    y /= 150;
-    x = Math.floor(x);
-    y = Math.floor(y);
-    if (data[y][x] === 0) {
-        if (isXTurn) {
-            data[y][x] = 1;
-        } else {
-            data[y][x] = 2;
+    if (playing) {
+        let x = e.offsetX;
+        let y = e.offsetY;
+        x /= 150;
+        y /= 150;
+        x = Math.floor(x);
+        y = Math.floor(y);
+        if (data[y][x] === 0) {
+            if (isXTurn) {
+                data[y][x] = 1;
+            } else {
+                data[y][x] = 2;
+            }
+            isXTurn = !isXTurn;
         }
-        isXTurn = !isXTurn;
+        checkForWin();
     }
-    checkForWin();
 };
 
 function checkForWin() {
     for (let i = 0; i < 3; i++) {
         if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0); {
-            gfx.cnv.onclick = null;
+            if (data[i][0] == 1) {
+                xWon = true;
+            } else {
+                xWon = false;
+            }
+                playing = false;
         }
     }
 }
