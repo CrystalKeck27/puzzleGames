@@ -32,10 +32,13 @@ function render() {
         }
     } else {
         background(225);
+        strokeWeight(1);
+        gfx.ctx.textAlign = "center";
+        gfx.ctx.font = "30px Arial";
         if (xWon) {
-            text("X WIN'S!", 225, 225);
+            text("X WINS!", 225, 225);
         } else {
-            text("O WIN'S!", 225, 225);
+            text("O WINS!", 225, 225);
         }
     }
 }
@@ -70,6 +73,30 @@ function checkForWin() {
             }
                 playing = false;
         }
+         if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
+             if (data[0][i] == 1) {
+                 xWon = true;
+             } else {
+                 xWon = false;
+             }
+                 playing = false;
+         }
+         if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
+             if (data[0][i] == 1) {
+                 xWon = true;
+             } else {
+                 xWon = false;
+             }
+             playing = false;
+         }
+         if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
+             if (data[0][i] == 1) {
+                 xWon = true;
+             } else {
+                 xWon = false;
+             }
+             playing = false;
+         }
     }
 }
 
