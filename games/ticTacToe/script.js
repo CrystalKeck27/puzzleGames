@@ -62,7 +62,7 @@ gfx.cnv.onclick = function(e) {
 
 function checkForWin() {
     for (let i = 0; i < 3; i++) {
-        if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0); {
+        if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0) {
             if (data[i][0] == 1) {
                 xWon = true;
             } else {
