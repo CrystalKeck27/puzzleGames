@@ -71,39 +71,32 @@ function checkForWin() {
             } else {
                 xWon = false;
             }
-            playing = false;
+                playing = false;
         }
-        if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
-            if (data[0][i] == 1) {
-                xWon = true;
-            } else {
-                xWon = false;
-            }
-            playing = false;
-        }
-        if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
-            if (data[0][i] == 1) {
-                xWon = true;
-            } else {
-                xWon = false;
-            }
-            playing = false;
-        }
-        if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
-            if (data[0][i] == 1) {
-                xWon = true;
-            } else {
-                xWon = false;
-            }
-            playing = false;
-        }
+         if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
+             if (data[0][i] == 1) {
+                 xWon = true;
+             } else {
+                 xWon = false;
+             }
+                 playing = false;
+         }
     }
-    for (let j = 0; j < 3; j++) {
-        for (let g = 0; g < 3; null) {
-            if (data[j][g] === 0) {
-                g++
-            }
+    if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
+        if (data[1][1] == 1) {
+            xWon = true;
+        } else {
+            xWon = false;
         }
+        playing = false;
+    }
+    if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
+        if (data[1][1] == 1) {
+            xWon = true;
+        } else {
+            xWon = false;
+        }
+        playing = false;
     }
 }
 
