@@ -1,5 +1,5 @@
 setCanvasFromId('gameCanvas');
-var xWon;
+var whoWon;
 var playing = true;
 var isXTurn = true;
 var data = [];
@@ -35,15 +35,17 @@ function render() {
         strokeWeight(1);
         gfx.ctx.textAlign = "center";
         gfx.ctx.font = "30px Arial";
-        if (xWon) {
+        if (whoWon == 0) {
+            text("DRAW!", 225, 225);
+        } else if (whoWon == 1) {
             text("X WINS!", 225, 225);
-        } else {
+        } else if (whoWon == 2) {
             text("O WINS!", 225, 225);
         }
     }
 }
 
-gfx.cnv.onclick = function(e) {
+gfx.cnv.onclick = function (e) {
     if (playing) {
         let x = e.offsetX;
         let y = e.offsetY;
@@ -66,36 +68,33 @@ gfx.cnv.onclick = function(e) {
 function checkForWin() {
     for (let i = 0; i < 3; i++) {
         if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0) {
-            if (data[i][0] == 1) {
-                xWon = true;
-            } else {
-                xWon = false;
-            }
-                playing = false;
+            whoWon = data[i][0];
+            playing = false;
         }
-         if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
-             if (data[0][i] == 1) {
-                 xWon = true;
-             } else {
-                 xWon = false;
-             }
-                 playing = false;
-         }
+        if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
+            whoWon = data[0][i];
+            playing = false;
+        }
     }
     if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
-        if (data[1][1] == 1) {
-            xWon = true;
-        } else {
-            xWon = false;
-        }
+        whoWon = data[1][1];
         playing = false;
     }
     if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
-        if (data[1][1] == 1) {
-            xWon = true;
-        } else {
-            xWon = false;
+        whoWon = data[1][1];
+        playing = false;
+    }
+    let isDraw = true;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (data[j][i] === 0) {
+                isDraw = false;
+                return;
+            }
         }
+    }
+    if (isDraw) {
+        whoWon = 0;
         playing = false;
     }
 }
