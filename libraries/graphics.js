@@ -216,10 +216,10 @@ function getHeight() {
 }
 
 //  Draws background
-function background(a, b, c) {
+function background(a, b, c, d) {
     push();
     resetTransform();
-    fill(a, b, c);
+    fill(a, b, c, d);
     gfx.ctx.fillRect(0, 0, getWidth(), getHeight());
     pop();
 }
