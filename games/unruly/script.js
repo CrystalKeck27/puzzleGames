@@ -18,7 +18,7 @@ function render() {
     fill(255);
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-            switch (grid[i][j]) {
+            switch (grid[j][i]) {
                 case 0:
                     fill(127);
                     break;
@@ -47,32 +47,32 @@ gfx.cnv.onclick = function (e) {
     y /= getHeight() / rows;
     x = Math.floor(x);
     y = Math.floor(y);
-    grid[x][y]++;
-    if (grid[x][y] == 3) grid[x][y] = 0;
+    grid[y][x]++;
+    if (grid[y][x] == 3) grid[y][x] = 0;
 }
 
 function autofill() {
     for (let i = 0; i < cols; i++) {
         if (getColData(i)[1] >= cols / 2) {
             for (let j = 0; j < rows; j++) {
-                if (grid[i][j] == 0) grid[i][j] = 2;
+                if (grid[j][i] == 0) grid[j][i] = 2;
             }
         }
         if (getColData(i)[2] >= cols / 2) {
             for (let j = 0; j < rows; j++) {
-                if (grid[i][j] == 0) grid[i][j] = 1;
+                if (grid[j][i] == 0) grid[j][i] = 1;
             }
         }
     }
     for (let i = 0; i < rows; i++) {
         if (getRowData(i)[1] >= rows / 2) {
             for (let j = 0; j < cols; j++) {
-                if (grid[j][i] == 0) grid[j][i] = 2;
+                if (grid[i][j] == 0) grid[i][j] = 2;
             }
         }
         if (getRowData(i)[2] >= rows / 2) {
             for (let j = 0; j < cols; j++) {
-                if (grid[j][i] == 0) grid[j][i] = 1;
+                if (grid[i][j] == 0) grid[i][j] = 1;
             }
         }
     }
@@ -86,7 +86,7 @@ function autofill() {
 function getRowData(row) {
     let count = [0, 0, 0];
     for (let i = 0; i < cols; i++) {
-        count[grid[i][row]]++;
+        count[grid[row][i]]++;
     }
     return count;
 }
@@ -94,7 +94,7 @@ function getRowData(row) {
 function getColData(col) {
     let count = [0, 0, 0];
     for (let i = 0; i < rows; i++) {
-        count[grid[col][i]]++;
+        count[grid[i][col]]++;
     }
     return count;
 }
