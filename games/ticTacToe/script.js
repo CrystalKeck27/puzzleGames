@@ -33,14 +33,15 @@ function render() {
         background(175, 175, 175, 0.7);
         strokeWeight(1);
         gfx.ctx.textAlign = "center";
+        gfx.ctx.textBaseline = "middle";
         gfx.ctx.font = "30px Arial";
-        text("Click anywhere to play again", 225, 260)
+        text("Click anywhere to play again", 225, 260);
         if (whoWon == 0) {
-            text("DRAW!", 225, 225);
+            text("DRAW!", 225, 190);
         } else if (whoWon == 1) {
-            text("X WINS!", 225, 225);
+            text("X WINS!", 225, 190);
         } else if (whoWon == 2) {
-            text("O WINS!", 225, 225);
+            text("O WINS!", 225, 190);
         }
     }
 }
