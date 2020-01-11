@@ -45,7 +45,7 @@ function render() {
     }
 }
 
-gfx.cnv.onclick = function (e) {
+gfx.cnv.onclick = function(e) {
     if (playing) {
         let x = e.offsetX;
         let y = e.offsetY;
@@ -70,19 +70,23 @@ function checkForWin() {
         if (data[i][0] == data[i][1] && data[i][1] == data[i][2] && data[i][0] !== 0) {
             whoWon = data[i][0];
             playing = false;
+            return;
         }
         if (data[0][i] == data[1][i] && data[1][i] == data[2][i] && data[0][i] !== 0) {
             whoWon = data[0][i];
             playing = false;
+            return;
         }
     }
     if (data[0][0] == data[1][1] && data[1][1] == data[2][2] && data[1][1] !== 0) {
         whoWon = data[1][1];
         playing = false;
+        return;
     }
     if (data[2][0] == data[1][1] && data[1][1] == data[0][2] && data[1][1] !== 0) {
         whoWon = data[1][1];
         playing = false;
+        return;
     }
     let isDraw = true;
     for (let i = 0; i < 3; i++) {
