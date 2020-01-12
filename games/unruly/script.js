@@ -3,9 +3,9 @@ var msgBox = document.getElementById("msgBox");
 
 let rows = 8, cols = 8;
 let grid = [];
-for (let i = 0; i < cols; i++) {
+for (let i = 0; i < rows; i++) {
     grid[i] = [];
-    for (let j = 0; j < rows; j++) {
+    for (let j = 0; j < cols; j++) {
         grid[i][j] = 0;
     }
 }
