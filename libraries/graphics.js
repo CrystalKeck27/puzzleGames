@@ -1,7 +1,5 @@
 /*---- GRAPHICS LIBRARY ----*/
 
-window.onresize = makeHiDPI;
-
 //  Stores variables needed for the library
 var gfx = {
     //the reference to the canvas
@@ -17,7 +15,7 @@ var gfx = {
     }],
     //tells drawing functions what to draw
     doStroke: true,
-    doFill: true,
+    doFill: true
 };
 
 //  Update doStroke and doFill
@@ -56,6 +54,7 @@ function makeHiDPI() {
         gfx.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         gfx.transform = gfx.ctx.getTransform();
     }
+    window.onresize = makeHiDPI;
 }
 
 
