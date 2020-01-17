@@ -2,10 +2,10 @@
 setCanvasFromId("gameCanvas");
 document.onclick = function () {
     gfx.cnv.requestFullscreen({ navigationUI: "hide" });
-}
+};
 
 document.onfullscreenchange = function () {
-    if (document.fullscreenElement == null) {uyuyt
+    if (document.fullscreenElement == null) {
         document.getElementById("msgBox").innerHTML = "Game Paused";
         document.onclick = function () {
             gfx.cnv.requestFullscreen({ navigationUI: "hide" });
@@ -27,6 +27,8 @@ function setupScreen() {
 //Variables
 var hasStarted = false;
 var currentState = 0;
+var mouseX = 0;
+var mouseY = 0;
 
 //Functions
 function setup() {
@@ -36,6 +38,11 @@ function setup() {
         initializeGameLoop(render);
         hasStarted = true;
     }
+    document.onmousemove = function(e){
+        mouseX = e.screenX;
+        mouseY = e.screenY;
+    }
+    states[currentState].setup();
 }
 
 function stop() {
@@ -43,5 +50,10 @@ function stop() {
 }
 
 function render() {
-    background(255);
+    states[currentState].render();
+}
+
+function changeState(s){
+    currentState = s;
+    states[currentState].setup();
 }

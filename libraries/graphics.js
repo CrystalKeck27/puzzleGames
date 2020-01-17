@@ -166,6 +166,7 @@ function stroke(a, b, c, d) {
 function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = Math.PI * 2, counterclockwise = false) {
     if (!height) height = width;
     gfx.ctx.beginPath();
+    gfx.ctx.moveTo(x, y);
     gfx.ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
     gfx.ctx.closePath();
     if (gfx.doFill) gfx.ctx.fill();
