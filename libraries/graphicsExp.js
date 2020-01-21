@@ -178,3 +178,20 @@ function background(a, b, c, d) {
     ctx.fillRect(0, 0, getWidth(), getHeight());
     pop();
 }
+
+//  Color functions
+function rgb(r, g, b){
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+function rgba(r, g, b, a){
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+}
+
+function createRadialGradient(x1, y1, r1, x2, y2, r2){
+    ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
+}
+
+function createConcentricRadialGradient(x, y, r1, r2){
+    ctx.createRadialGradient(x, y, r1, x, y, r2);
+}
