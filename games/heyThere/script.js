@@ -57,3 +57,11 @@ function changeState(s){
     currentState = s;
     states[currentState].setup();
 }
+
+function wait(x){
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, x);
+    });
+}

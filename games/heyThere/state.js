@@ -25,15 +25,26 @@ class bullet {
 }
 
 const OPENING_STATE = 0;
-const NUM_STATES = 1;
+const TESTING_STATE = 1;
+const NUM_STATES = 2;
 
 var states = [];
 for (let i = 0; i < NUM_STATES; i++) {
     states[i] = new state();
 }
 
-states[OPENING_STATE].render = function () {
-    background(255, 255, 255, 0.01);
+states[OPENING_STATE].setup = async function(){
+    let gradient = gfx.ctx.createRadialGradient(getWidth()/2, getHeight()/2, 0, getWidth()/2, getHeight()/2, 400);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+    gradient.addColorStop(1, 'black');
+    background(255);
+    await wait(3000);
+    background(gradient);
+    text("Welcome to the Game", getWidth()/2, getHeight()/2);
+}
+
+states[TESTING_STATE].render = function () {
+    background(255, 255, 255, 0.25);
     push();
     fill();
     translate(mouseX, mouseY);
@@ -49,9 +60,9 @@ states[OPENING_STATE].render = function () {
         this.lastY += (mouseY - this.lastY) / 5;
     }
     noFill();
-    if (this.isEating && this.a < 0.4) {
+    if (this.isEating && this.a < 0.6) {
         this.a += this.eatSpeed;
-    } else if (this.isEating && this.a > 0.4) {
+    } else if (this.isEating && this.a > 0.6) {
         this.isEating = false;
     } else if (this.a > 0) {
         this.a -= this.eatSpeed;
@@ -65,24 +76,23 @@ states[OPENING_STATE].render = function () {
     });
 }
 
-states[OPENING_STATE].setup = function () {
+states[TESTING_STATE].setup = function () {
     this.lastX = 0;
     this.lastY = 0;
     this.a = 0;
     this.isEating = false;
     this.eatSpeed = 0.07;
     this.bullets = [];
-    document.onclick = function () {
-        states[OPENING_STATE].isEating = true;
-        states[OPENING_STATE].fireBullet();
+    document.onclick = async function () {
+        states[TESTING_STATE].isEating = true;
+        states[TESTING_STATE].fireBullet();
     }
 }
 
-states[OPENING_STATE].fireBullet = function () {
+states[TESTING_STATE].fireBullet = async function () {
     let ratio = (mouseY - this.lastY) / (mouseX - this.lastX);
     this.bullets.push(new bullet(mouseX, mouseY, Math.atan2((mouseY - this.lastY), (mouseX - this.lastX))));
     setTimeout(() => {
-        states[OPENING_STATE].bullets.shift();
-        console.log("yes");
+        states[TESTING_STATE].bullets.shift();
     }, 3500);
 }

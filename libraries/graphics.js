@@ -124,7 +124,7 @@ function noFill(){
 //  Changes what color shapes are filled with
 function fill(a, b, c, d) {
     gfx.doFill = true;
-    if (typeof(a) == 'string') {
+    if (typeof(a) == 'string' || typeof(a) != 'number') {
         gfx.ctx.fillStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
         if ((typeof (b) == 'number' && b < 256 && b >= 0) && (typeof (c) == 'number' && c < 256 && c >= 0)) {
@@ -147,7 +147,7 @@ function noStroke(){
 //  Changes what color strokes are drawn with
 function stroke(a, b, c, d) {
     gfx.doStroke = true;
-    if (typeof(a) == 'string') {
+    if (typeof(a) == 'string' || typeof(a) != 'number') {
         gfx.ctx.strokeStyle = a;
     } else if (typeof(a) == 'number' && a < 256 && a >= 0) {
         if ((typeof (b) == 'number' && b < 256 && b >= 0) && (typeof (c) == 'number' && c < 256 && c >= 0)) {
