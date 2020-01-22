@@ -1,9 +1,9 @@
-class state {
+class State {
     render() { }
     setup() { }
 }
 
-class bullet {
+class Bullet {
     constructor(x, y, angle) {
         this.x = x;
         this.y = y;
@@ -30,7 +30,7 @@ const NUM_STATES = 2;
 
 var states = [];
 for (let i = 0; i < NUM_STATES; i++) {
-    states[i] = new state();
+    states[i] = new State();
 }
 
 states[OPENING_STATE].setup = async function(){
@@ -91,7 +91,7 @@ states[TESTING_STATE].setup = function () {
 
 states[TESTING_STATE].fireBullet = async function () {
     let ratio = (mouseY - this.lastY) / (mouseX - this.lastX);
-    this.bullets.push(new bullet(mouseX, mouseY, Math.atan2((mouseY - this.lastY), (mouseX - this.lastX))));
+    this.bullets.push(new Bullet(mouseX, mouseY, Math.atan2((mouseY - this.lastY), (mouseX - this.lastX))));
     setTimeout(() => {
         states[TESTING_STATE].bullets.shift();
     }, 3500);
