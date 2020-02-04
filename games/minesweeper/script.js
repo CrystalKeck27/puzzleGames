@@ -13,6 +13,20 @@ var rows, cols, numMines;
 var grid = [];
 
 reset(8, 8, 10);
+render();
+
+function render() {
+    background(255);
+    fill(255);
+    stroke(0);
+    let w = getWidth() / cols;
+    let h = getHeight() / rows;
+    for (let x = 0; x < cols; x++) {
+        for (let y = 0; y < rows; y++) {
+            rect(x * w, y * h, w, h);
+        }
+    }
+}
 
 //util functions
 function reset(rowsParam, colsParam, numMinesParam) {
@@ -30,8 +44,8 @@ function reset(rowsParam, colsParam, numMinesParam) {
 function generate() {
     if (numMines > rows * cols) throw RangeError("Too many mines");
     let temp = [];
-    for (let i = 0; i < rows; y++) {
-        temp.push(...grid[y]);
+    for (let i = 0; i < rows; i++) {
+        temp.push(...grid[i]);
     }
     for (let i = 0; i < numMines; i++) {
 
