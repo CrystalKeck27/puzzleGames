@@ -1,6 +1,6 @@
 setCanvasFromId("gameCanvas");
 //class definitions
-class cell {
+class Cell {
     constructor(isMine, isCovered, isFlagged, adjacentMines) {
         this.isMine = isMine;
         this.isCovered = isCovered;
@@ -22,7 +22,7 @@ function reset(rowsParam, colsParam, numMinesParam) {
     for (let y = 0; y < rows; y++) {
         grid[y] = [];
         for (let x = 0; x < cols; x++) {
-            grid[y][x] = new cell();
+            grid[y][x] = new Cell();
         }
     }
 }
