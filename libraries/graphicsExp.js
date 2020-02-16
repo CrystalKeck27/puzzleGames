@@ -125,7 +125,6 @@ function noStroke() {
 function ellipse(x, y, width, height, rotation = 0, startAngle = 0, endAngle = Math.PI * 2, counterclockwise = false) {
     if (!height) height = width;
     ctx.beginPath();
-    ctx.moveTo(x, y);
     ctx.ellipse(x, y, width, height, rotation, startAngle, endAngle, counterclockwise);
     ctx.closePath();
     ctx.fill();
@@ -159,6 +158,18 @@ function text(str, x, y) {
     ctx.strokeText(str, x, y);
 }
 
+function textAlign(alignment){
+    ctx.textAlign = alignment;
+}
+
+function textBaseLine(baseLine){
+    ctx.textBaseLine = baseLine;
+}
+
+function font(f){
+    ctx.font = f;
+}
+
 //  Changes the width of all lines drawn
 function strokeWeight(width) {
     ctx.lineWidth = width;
@@ -183,19 +194,25 @@ function rgba(r, g, b, a) {
 }
 
 function createRadialGradient(x1, y1, r1, x2, y2, r2) {
-    ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
+    return ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
 }
 
 function createConcentricRadialGradient(x, y, r1, r2) {
-    ctx.createRadialGradient(x, y, r1, x, y, r2);
+    return ctx.createRadialGradient(x, y, r1, x, y, r2);
+}
+
+function createLinearGradient(x1, y1, x2, y2){
+    return ctx.createLinearGradient(x1, y1, x2, y2);
 }
 
 export {
     background,
     createConcentricRadialGradient,
+    createLinearGradient,
     createRadialGradient,
     ellipse,
     fill,
+    font,
     line,
     noFill,
     noStroke,
@@ -214,6 +231,8 @@ export {
     stroke,
     strokeWeight,
     text,
+    textAlign,
+    textBaseLine,
     transform,
     translate,
     width,
